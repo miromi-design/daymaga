@@ -1,0 +1,82 @@
+@use "sass:math";
+
+// pxをremに変換
+@function rm($px, $basepx: 16px) {
+  @return calc($px / $basepx * 1rem);
+}
+
+// pxをremに変換
+@function vw($px, $basepx: 390px) {
+  @return calc($px / $basepx * 100vw);
+}
+
+//引数として与えられた値を小数点第三位までで四捨五入して返す
+@function roundToThreeDecimals($value) {
+  @return math.div(math.round($value * 1000), 1000);
+}
+
+//小数点以下を指定した桁数で丸める
+@function roundToDecimal($number, $decimal: 3) {
+  $multiplier: math.pow(10, $decimal);
+  @return math.div(math.round($number * $multiplier), $multiplier);
+}
+
+//=====================================
+//    画面幅に応じてカンプの最小から最大までの間で可変する
+//=====================================
+@function myClamp($min, $max, $min-view-port: 390, $max-view-port: 1440) {
+  //指定された値の範囲を画面の幅で変動させるための計算結果を格納する
+  $valiable-part: math.div($max - $min, $max-view-port - $min-view-port);
+  //計算結果を格納する変数
+  $constant: math.div($max - $max-view-port * $valiable-part, 10);
+  // 1remに変換した後に四捨五入
+  $min-rem: roundToDecimal(math.div($min, 10) * 1rem);
+  // 1remに変換した後に四捨五入
+  $max-rem: roundToDecimal(math.div($max, 10) * 1rem);
+  // remの値を四捨五入
+  $variable-rem: roundToDecimal($constant * 1rem);
+  // vwの値を四捨五入
+  $variable-vw: roundToDecimal(100 * $valiable-part * 1vw);
+  @return clamp($min-rem, $variable-rem + $variable-vw, $max-rem);
+}
+
+
+@function myHeader($min, $max, $min-view-port: 1124, $max-view-port: 1440) {
+  // 指定された値の範囲を画面の幅で変動させるための計算結果を格納する
+  $valiable-part: math.div($max - $min, $max-view-port - $min-view-port);
+  // 計算結果を格納する変数
+  $constant: math.div($max - $max-view-port * $valiable-part, 10);
+  // 1remに変換した後に四捨五入
+  $min-rem: roundToDecimal(math.div($min, 10) * 1rem);
+  // 1remに変換した後に四捨五入
+  $max-rem: roundToDecimal(math.div($max, 10) * 1rem);
+  // remの値を四捨五入
+  $variable-rem: roundToDecimal($constant * 1rem);
+  // vwの値を四捨五入
+  $variable-vw: roundToDecimal(100 * $valiable-part * 1vw);
+  @return clamp($min-rem, $variable-rem + $variable-vw, $max-rem);
+}
+
+
+//=====================================
+//    表示行数の制御
+//=====================================
+//@include line-clamp(1);のように使用する
+@mixin line-clamp($count: 3) {
+  // 引数が数値以外だったらエラーを返す
+  @if type-of($count) != 'number' {//何行にするかいれる
+    @error 'line-clampの引数は必ず数値で指定してください';
+  }
+
+  @if $count == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $count;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+

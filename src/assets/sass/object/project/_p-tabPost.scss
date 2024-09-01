@@ -1,0 +1,379 @@
+@use "../../global/mixin" as *;
+@use "../../global/color" as *;
+@use "../../global/font" as *;
+@use "../../global/variables" as *;
+@use "../../global/function" as *;
+
+//順番選択のラップ
+.p-tabPost__lineUpWrap {
+  display: flex;
+  gap: 24px;
+  padding-inline-end: 8px;
+  justify-content: end;
+  grid-area: a;
+
+  @include mq {
+    grid-area: b;
+  }
+}
+
+.p-tabPost__lineUp {
+  position: relative;
+  color: $text-gray-color;
+  font-size: myClamp(14, 18);
+  line-height: 130%;
+
+  &:first-child {
+    &::after {
+      content: "";
+      position: absolute;
+      top: 55%;
+      transform: translateY(-50%);
+      right: -12px;
+      width: 1px;
+      height: 16px;
+      background: $text-gray-color;
+    }
+  }
+
+  &.is-active {
+    color: $accent-color;
+  }
+}
+
+//タブコンテンツ全体
+.p-tabPost__tabContents {
+  margin-block-start: 20px;
+  display: grid;
+  grid-template-columns: 1fr 120px 27px;
+  grid-template-areas:
+    "a a a"
+    "b b c";
+  @include mq {
+    margin-block-start: 44px;
+    grid-template-areas:
+      "a a a b"
+      "c c c c";
+    align-items: center;
+  }
+
+  &.is-lower-page {
+    @include mq {
+      margin-block-start: 37px;
+    }
+  }
+}
+
+.hidden-tab {
+  display: none !important;
+}
+
+//=====================================
+//    タブの設定
+//=====================================
+.p-tabPost__tabList {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: myClamp(5, 10);
+  grid-area: c;
+  margin-block-start: 8px;
+
+  @include mq {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    grid-area: a;
+    margin-block-start: 0;
+  }
+}
+
+.p-tabPost__tab {
+  writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
+  -webkit-writing-mode: vertical-rl;
+  text-orientation: upright;
+  -webkit-text-orientation: upright;
+  display: inline-block;
+  font-size: myClamp(14, 16);
+  font-weight: 500;
+  line-height: 115%;
+  letter-spacing: 2px;
+  background: $white;
+  border-top: 1px solid;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+  color: $accent-color-lightBlue;
+  border-radius: 0px 12px 12px 0px;
+  width: fit-content;
+  height: auto;
+  padding: 12px 6px 12px 4px;
+  transition-duration: $hover-transition;
+  transition-property: opacity, background-color, color;
+
+  @include mq {
+    letter-spacing: 0;
+    writing-mode: horizontal-tb; /* 横書きに戻す */
+    text-orientation: mixed; /* テキストの向きをデフォルトに戻す */
+    border-radius: 12px 12px 0px 0px;
+    padding: 6px 20px 4px 20px;
+    line-height: $line-height-1dot5;
+    border-top: 1px solid;
+    border-right: 1px solid;
+    border-left: 1px solid;
+    border-bottom: none;
+  }
+
+  // タブが選択されている場合のスタイル
+  &[role="tab"][aria-selected="true"] {
+    color: $white;
+    background: $accent-color-lightBlue;
+    border-color: $accent-color-lightBlue;
+
+    // 新着情報用
+    &.is-new {
+      background: $accent-color;
+      border-color: $accent-color;
+    }
+
+    // Tips用
+    &.is-tips {
+      background: $accent-color-green;
+      border-color: $accent-color-green;
+    }
+
+    // インタビュー用
+    &.is-interview {
+      background: $accent-color-purple;
+      border-color: $accent-color-purple;
+    }
+
+    // News用
+    &.is-news {
+      background: $accent-color-pink;
+      border-color: $accent-color-pink;
+    }
+  }
+
+  &:focus-visible {
+    background: $accent-color-lightBlue;
+    color: $white;
+    border-color: $accent-color-lightBlue;
+  }
+
+  @media (any-hover: hover) {
+    &:not([aria-selected="true"]):hover {
+      /* 非選択のタブのホバースタイル */
+      background: $accent-color-lightBlue;
+      color: $white;
+      border-color: $accent-color-lightBlue;
+    }
+  }
+
+  // 新着情報用のデフォルトスタイル
+  &.is-new {
+    color: $accent-color;
+
+    @media (any-hover: hover) {
+      &:hover {
+        background: $accent-color;
+        color: $white;
+        border-color: $accent-color;
+      }
+    }
+  }
+
+  // Tips用のデフォルトスタイル
+  &.is-tips {
+    color: $accent-color-green;
+
+    @media (any-hover: hover) {
+      &:hover {
+        background: $accent-color-green;
+        color: $white;
+        border-color: $accent-color-green;
+      }
+    }
+  }
+
+  // インタビュー用のデフォルトスタイル
+  &.is-interview {
+    color: $accent-color-purple;
+
+    @media (any-hover: hover) {
+      &:hover {
+        background: $accent-color-purple;
+        color: $white;
+        border-color: $accent-color-purple;
+      }
+    }
+  }
+
+  // News用のデフォルトスタイル
+  &.is-news {
+    color: $accent-color-pink;
+
+    @media (any-hover: hover) {
+      &:hover {
+        background: $accent-color-pink;
+        color: $white;
+        border-color: $accent-color-pink;
+      }
+    }
+  }
+}
+
+//=====================================
+//    カテゴリ・タグページのタグ設定
+//=====================================
+.p-tabPost__tab--tabALL {
+  writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
+  -webkit-writing-mode: vertical-rl;
+  text-orientation: upright;
+  -webkit-text-orientation: upright;
+  display: inline-block;
+
+  // gap: myClamp(5, 10);
+  grid-area: c;
+  margin-inline-start: 8px; //縦書きで上にくる余白
+
+  font-size: myClamp(14, 16);
+  font-weight: 500;
+  line-height: 115%;
+  color: $white;
+  background: $accent-color-lightBlue;
+  border: 1px solid $accent-color-lightBlue;
+  border-radius: 0px 12px 12px 0px;
+  width: 27px;
+  height: fit-content;
+  padding: 12px 6px 12px 4px;
+  white-space: nowrap;
+
+  @include mq {
+    grid-area: a;
+    margin-block-start: 0;
+    writing-mode: horizontal-tb; /* 横書きに戻す */
+    text-orientation: mixed; /* テキストの向きをデフォルトに戻す */
+    border-radius: 12px 12px 0px 0px;
+    padding: 6px 20px 4px 20px;
+    line-height: $line-height-1dot5;
+    margin-inline-start: 0;
+    height: fit-content;
+    width: fit-content;
+  }
+
+  // 新着情報用
+  &.is-new {
+    background: $accent-color;
+    border-color: $accent-color;
+  }
+
+  // Tips用
+  &.is-tips {
+    background: $accent-color-green;
+    border-color: $accent-color-green;
+  }
+
+  // インタビュー用
+  &.is-interview {
+    background: $accent-color-purple;
+    border-color: $accent-color-purple;
+  }
+
+  // News用
+  &.is-news {
+    background: $accent-color-pink;
+    border-color: $accent-color-pink;
+  }
+}
+
+.p-tabPost__tabpanelWrapper {
+  grid-area: b;
+  margin-block-start: 8px;
+
+  @include mq {
+    grid-area: c;
+    margin-block-start: 0;
+  }
+}
+
+//=====================================
+//    タブの中身
+//=====================================
+.p-tabPost__tabpanel {
+  display: block;
+  background: $accent-color-lightBlue;
+  border-radius: 16px 0px 16px 16px;
+  grid-column: 1 / -1;
+
+  @include mq {
+    border-radius: 0px 16px 16px 16px;
+    max-width: $inner-width;
+    width: 100%;
+  }
+  &:target {
+    display: revert;
+  }
+
+  // 新着情報用
+  &.is-new {
+    background: $accent-color;
+  }
+
+  // Tips用
+  &.is-tips {
+    background: $accent-color-green;
+  }
+
+  // インタビュー用
+  &.is-interview {
+    background: $accent-color-purple;
+  }
+
+  // News用
+  &.is-news {
+    background: $accent-color-pink;
+  }
+}
+
+.p-tabPost__cards {
+  width: 100%;
+  display: grid;
+  gap: myClamp(12, 32);
+  grid-template-columns: 1fr;
+  padding: myClamp(12, 32);
+
+  /* 750px以上950px未満の場合: 横2枚×縦3行 */
+  @include mq {
+    max-width: $inner-width;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 950px以上の場合: 横3枚×縦3行 */
+  @include mq(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.p-tabPost__noPost {
+  font-size: myClamp(15, 20);
+  font-weight: 500;
+  line-height: $line-height-1dot4;
+  letter-spacing: 0.4px;
+  display: grid;
+  place-content: center;
+  padding: 16px;
+  background: $white;
+  border-radius: 12px;
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.03),
+    0px 16px 30px 0px rgba(0, 0, 0, 0.05);
+  height: 200px;
+  grid-column: 1 / -1;
+
+  @include mq {
+    grid-column-end: span 3;
+    width: auto;
+    height: 60px;
+  }
+}

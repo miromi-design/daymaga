@@ -1,0 +1,158 @@
+@use "../global/mixin" as *;
+@use "../global/font" as *;
+@use "../global/color" as *;
+@use "../global/variables" as *;
+@use "../global/function" as *;
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  //スマートフォン横向き時のテキストの拡大を防ぐため
+  text-size-adjust: 100%;
+}
+
+body {
+  font-size: 1.6rem;
+  line-height: $line-height-1dot2;
+  font-weight: 400;
+  font-family: $font-ja;
+  color: $text-color;
+  background: $bg-color;
+
+  &.no-scroll {
+    overflow: hidden;
+  }
+}
+
+body * {
+  line-height: $line-height-1dot2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+
+  &:focus-visible {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}
+
+
+picture,
+img,
+a,
+span {
+  display: inline-block;
+}
+
+img,
+svg {
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+}
+
+input {
+  margin: 0;
+  padding: 0;
+}
+
+textarea {
+  padding: 0;
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  inline-size: fit-content;
+  //ダブルタップでズームするジェスチャを無効
+  touch-action: manipulation;
+  //内部テキストを選択不可能
+  user-select: none;
+}
+
+* {
+  &:focus-visible {
+    outline: auto magenta;
+    outline-offset: 2px;
+  }
+}
+
+//クリック時のoutlineの発生を抑制
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+//ダブルタップ時のジェスチャーを無効にする
+:where(button, [type="button"], [type="reset"], [type="submit"]) {
+  touch-action: manipulation;
+}
+
+//リストスタイルなし
+:where(ul, ol) {
+  list-style-type: "";
+  padding: unset;
+}
+
+//cursor:pointerを設定
+:where(
+    :any-link,
+    button,
+    [type="button"],
+    [type="reset"],
+    [type="submit"],
+    label[for],
+    select,
+    summary,
+    [role="tab"],
+    [role="button"]
+  ) {
+  cursor: pointer;
+}
+
+//必要不可欠でないアニメーションを無効にする
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after,
+  ::backdrop {
+    background-attachment: scroll !important;
+    transition-delay: 0s !important;
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+//スクロールしているときに予期せぬ動作が発生するのを防ぐ
+.scroller {
+  overflow: auto;
+  overscroll-behavior-block: contain;
+}
+
+//ページ内リンクで遷移した際に、多めにスクロールされる
+[id],
+:focus {
+  scroll-margin-block-start: $header-block-size;
+}

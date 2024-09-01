@@ -1,0 +1,18 @@
+@use "../global/mixin" as *;
+@use "../global/color" as *;
+@use "../global/font" as *;
+@use "../global/variables" as *;
+@use "../global/function" as *;
+
+
+.l-inner {
+  max-width: $inner-width-sp;
+  width: 100%;
+  padding-inline: 20px;
+  margin-inline: auto;
+
+  @include mq {
+    max-width: calc($inner-width + 80px);
+    padding-inline: 40px;
+  }
+}

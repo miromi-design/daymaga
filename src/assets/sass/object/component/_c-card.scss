@@ -1,0 +1,123 @@
+@use "../../global/mixin" as *;
+@use "../../global/color" as *;
+@use "../../global/font" as *;
+@use "../../global/variables" as *;
+@use "../../global/function" as *;
+
+.c-card {
+  display: contents;
+}
+
+.c-card__link {
+  transition: opacity $hover-transition ease;
+  padding: 16px;
+  background-color: $white;
+  border-radius: 12px;
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.03),
+    0px 5px 30px 0px rgba(20, 43, 78, 0.2);
+  gap: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  &:focus-visible {
+    opacity: $opacity-08;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      opacity: $opacity-08;
+    }
+  }
+}
+
+.c-card__title {
+  order: 3;
+  flex-grow: 1;
+
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: block-axis;
+  -webkit-line-clamp: 2; //2行以上は省略する
+  overflow: hidden;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: $line-height-1dot4;
+  letter-spacing: 0.3px;
+}
+
+.c-card__category {
+  order: 4;
+
+  span {
+    display: inline-block;
+    width: fit-content;
+    padding: 3px 15px;
+    border-radius: 4px;
+    font-size: 1.3rem;
+    line-height: $line-height-1dot6;
+    border: 1px solid;
+  }
+  //新着情報
+  .is-new {
+    color: $accent-color;
+  }
+
+  //ニュース
+  .is-news {
+    color: $accent-color-pink;
+  }
+
+  //Tips
+  .is-tips {
+    color: $accent-color-green;
+  }
+
+  //インタビュー
+  .is-interview {
+    color: $accent-color-purple;
+  }
+}
+
+.c-card__tag {
+  order: 5;
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+  width: 100%; /* 最大幅を設定 */
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.c-card__tagName {
+  display: inline-block;
+  background: $tag-color;
+  padding: 1px 8px;
+  font-size: 1.2rem;
+  width: fit-content;
+  line-height: $line-height-1dot8;
+  border-radius: 24px;
+  flex-shrink: 0;
+}
+
+.c-card__publish {
+  order: 2;
+  font-size: 1.2rem;
+  line-height: $line-height-1dot2;
+  color: $text-gray-color;
+  margin-top: 4px;
+}
+
+.c-card__thumbnail {
+  order: 1;
+  min-inline-size: 0;
+  contain: strict;
+  aspect-ratio: 270 / 152;
+  border-radius: 8px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

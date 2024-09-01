@@ -1,0 +1,24 @@
+@use "../../global/mixin" as *;
+@use "../../global/color" as *;
+@use "../../global/font" as *;
+@use "../../global/variables" as *;
+@use "../../global/function" as *;
+
+.p-index-all {
+  margin-block-start: 48px;
+
+  @include mq {
+    margin-block-start: 64px;
+  }
+}
+
+.p-index-all__footer {
+  text-align: center;
+  margin-block-start: 20px;
+
+  @include mq {
+    text-align: right;
+    margin-block-start: 32px;
+  }
+}
+

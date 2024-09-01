@@ -1,0 +1,222 @@
+@use "../global/mixin" as *;
+@use "../global/color" as *;
+@use "../global/font" as *;
+@use "../global/variables" as *;
+@use "../global/function" as *;
+
+//=====================================
+//    drawerのアイコン
+//=====================================
+.l-drawer__iconWrap {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: $accent-color;
+  padding: 84px 28px 28px;
+
+  border-radius: 0px 0px 0px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  z-index: map-get($layer, "drawer") + 1;
+  transition-duration: $hover-transition;
+  transition-property: padding, flex-direction, gap, border-radius;
+
+  @media screen and (min-width: 1124px) {
+    display: none;
+  }
+
+  &.-active {
+    background: transparent;
+
+    .l-drawer__keyword {
+      display: none;
+    }
+  }
+
+  //スクロール後の設定
+  &.is-scrolled {
+    flex-direction: row;
+    padding: 10px 116px 20px 40px;
+    gap: 48px;
+    border-radius: 0px 0px 0px 24px;
+
+    .l-drawer__icon {
+      top: 13px;
+      right: 32px;
+    }
+  }
+}
+
+.l-drawer__icon {
+  position: fixed;
+  top: 28px;
+  right: 24px;
+  z-index: map-get($layer, "drawer") + 2;
+  transition: opacity $hover-transition ease;
+
+  @media screen and (min-width: 1124px) {
+    display: none;
+  }
+
+  &:focus-visible {
+    opacity: $opacity-08;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      opacity: $opacity-08;
+    }
+  }
+
+  &.-active {
+    .l-drawer__icon--bar {
+      &:nth-of-type(1) {
+        top: 8px;
+        rotate: -32deg;
+      }
+
+      &:nth-of-type(2) {
+        display: none;
+      }
+
+      &:nth-of-type(3) {
+        top: 8px;
+        rotate: 32deg;
+      }
+    }
+  }
+  &--bars {
+    display: block;
+    position: relative;
+    width: 36px;
+    height: 24px;
+  }
+
+  &--bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 2.8px;
+    border-radius: 6px;
+    background: $white;
+    transition: rotate $hover-transition linear, top $hover-transition linear;
+
+    &:nth-of-type(2) {
+      top: 11px;
+    }
+
+    &:nth-of-type(3) {
+      top: 21px;
+    }
+  }
+}
+.l-drawer__keyword {
+}
+.l-drawer__keyword,
+.l-drawer__contentKeyword {
+  width: 28px;
+  aspect-ratio: 1;
+  margin-inline: auto;
+  transition: opacity $hover-transition ease;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &:focus-visible {
+    opacity: $opacity-08;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      opacity: $opacity-08;
+    }
+  }
+}
+
+//=====================================
+//    drawerの中身
+//=====================================
+.l-drawer__content {
+  width: 240px;
+  padding-block: 77px 32px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: $accent-color;
+  transform: translateX(100%);
+  transition: transform $hover-transition linear,
+    visibility $hover-transition linear;
+  z-index: map-get($layer, "drawer");
+  visibility: hidden;
+  border-radius: 0px 0px 0px 24px;
+  background: rgba($accent-color, 0.95);
+
+  &.-active {
+    transform: translateX(0);
+    visibility: visible;
+  }
+}
+
+.l-drawer__inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.l-drawer__menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-direction: column;
+  color: $white;
+
+  li {
+    transition: opacity $hover-transition ease;
+    padding-block: 4px;
+
+    &:focus-visible {
+      opacity: $opacity-08;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        opacity: $opacity-08;
+      }
+    }
+  }
+}
+
+.l-drawer__contentKeyword {
+  margin-block-start: 26px;
+  padding-bottom: 4px;
+}
+
+.l-drawer__background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $bg-color;
+  opacity: 0;
+  z-index: map-get($layer, "header") + 1;
+  visibility: hidden;
+
+  &.-active {
+    opacity: $opacity-06;
+    visibility: visible;
+  }
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

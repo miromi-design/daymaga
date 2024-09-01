@@ -1,0 +1,271 @@
+@use "../../global/mixin" as *;
+@use "../../global/color" as *;
+@use "../../global/font" as *;
+@use "../../global/variables" as *;
+@use "../../global/function" as *;
+
+//=====================================
+//    mvのスライダー
+//=====================================
+.p-index-mv {
+  .splide {
+  }
+
+  .splide__track {
+    padding-block-start: myClamp(12, 40);
+    padding-block-end: 58px;
+
+    @include mq {
+      padding-block-end: 48px;
+    }
+  }
+
+  .splide__list {
+    flex: 1;
+  }
+
+  .splide__slide {
+    position: relative;
+    transform: translateY(-6px);
+    transition: transform 0.5s ease;
+
+    @include mq {
+      transform: translateY(12px);
+    }
+
+    &:not(.is-active) {
+      transform: translateY(6px);
+
+      @include mq {
+        transform: translateY(52px);
+      }
+    }
+  }
+
+  .splide__arrows {
+  }
+
+  .splide__arrow {
+  }
+
+  .splide__arrow--prev,
+  .splide__arrow--next {
+    &::after {
+      content: "";
+      position: absolute;
+      background: url(../img/common/fv-btn.png)
+        no-repeat center center / contain;
+      width: 36px;
+      aspect-ratio: 1;
+      top: calc(50% - 63px);
+      z-index: 2;
+      transition: opacity $hover-transition;
+
+      @include mq {
+        top: 52%;
+        transform: translateY(-50%);
+      }
+    }
+
+    &:focus-visible {
+      &::after {
+        opacity: $opacity-08;
+      }
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        &::after {
+          opacity: $opacity-08;
+        }
+      }
+    }
+  }
+
+  //左のボタン
+  .splide__arrow--prev {
+    &::after {
+      left: 9px;
+
+      @include mq {
+        left: calc(50% - 375px);
+      }
+    }
+  }
+
+  //右のボタン
+  .splide__arrow--next {
+    &::after {
+      scale: -1 1; //左右反転させる
+      right: 9px;
+
+      @include mq {
+        right: calc(50% - 375px);
+      }
+    }
+  }
+}
+
+//=====================================
+//    recommendのスライダー
+//=====================================
+.p-recommend__splide {
+  .splide__track {
+    margin-block-start: calc(48px + 22px);
+    overflow: visible;
+
+    @include mq {
+      margin-block-start: 84px;
+    }
+  }
+
+  .splide__list {
+    overflow: visible;
+  }
+
+  .splide__slide {
+    transition: transform $hover-transition ease;
+  }
+
+  .splide__arrows {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+
+    @include mq {
+      margin-block-start: -64px;
+    }
+  }
+
+  .splide__arrow {
+    transition: opacity $hover-transition ease;
+
+    &::after {
+      content: "";
+      position: absolute;
+      background: url(../img/common/arrow-line.svg),
+        url(../img/common/arrow-line-active.svg)
+          no-repeat center center;
+      background-size: cover, 0 0; //2つ目を非表示
+      width: 48px;
+      aspect-ratio: 1;
+      top: 0;
+      z-index: 2;
+      opacity: 1;
+    }
+
+    &:focus-visible {
+      &::after {
+        background-size: 0 0, cover; //1つ目を非表示
+      }
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        &::after {
+          background-size: 0 0, cover; //1つ目を非表示
+        }
+      }
+    }
+
+    &.is-single {
+      &::after {
+        background: url(../img/common/arrow-single.svg),
+          url(../img/common/arrow-single-active.svg)
+            no-repeat center center;
+        background-size: cover, 0 0; // 2つ目を非表示
+      }
+
+      &:focus-visible {
+        &::after {
+          background-size: 0 0, cover; //1つ目を非表示
+        }
+      }
+
+      @media (any-hover: hover) {
+        &:hover {
+          &::after {
+            background-size: 0 0, cover; //1つ目を非表示
+          }
+        }
+      }
+    }
+  }
+
+  //ボタン無効時の設定
+  .splide__arrow--disabled {
+    &::after {
+      opacity: 0.5; /* 無効時は50% */
+      pointer-events: none;
+    }
+  }
+
+  //左のボタン
+  .splide__arrow--prev {
+    &::after {
+      right: calc(48px + 16px);
+      scale: -1 1; //左右反転させる
+
+      @include mq {
+        right: 58px;
+      }
+    }
+
+    //シングルページ
+    &.is-single {
+      &::after {
+        right: 94px;
+
+        @include mq {
+          right: 57px;
+        }
+      }
+    }
+  }
+
+  //右のボタン
+  .splide__arrow--next {
+    &::after {
+      right: 0;
+
+      @include mq {
+        right: -5px;
+      }
+    }
+
+    //シングルページ
+    &.is-single {
+      &::after {
+        right: 30px;
+
+        @include mq {
+          right: -6px;
+        }
+      }
+    }
+  }
+
+  .my-carousel-progress {
+    background: #dde1f0;
+    border-radius: 4px;
+    margin-block-start: 11px;
+
+    @include mq {
+      margin-block-start: 21px;
+    }
+
+    &.is-single {
+      @include mq {
+        margin-block-start: 36px;
+      }
+    }
+  }
+
+  .my-carousel-progress-bar {
+    background: $accent-color;
+    height: 8px;
+    transition: width 400ms ease;
+    width: 0;
+    border-radius: 4px;
+  }
+}

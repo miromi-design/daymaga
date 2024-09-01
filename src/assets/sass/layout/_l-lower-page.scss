@@ -1,0 +1,13 @@
+@use "../global/mixin" as *;
+@use "../global/color" as *;
+@use "../global/font" as *;
+@use "../global/variables" as *;
+@use "../global/function" as *;
+
+.l-lower-page {
+  margin-block-start: 191px;
+
+  @include mq {
+    margin-block-start: 205px;
+  }
+}

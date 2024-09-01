@@ -1,0 +1,81 @@
+@use "../../global/mixin" as *;
+@use "../../global/color" as *;
+@use "../../global/font" as *;
+@use "../../global/variables" as *;
+@use "../../global/function" as *;
+
+.p-cta {
+  display: grid;
+  place-content: center;
+  margin-block-start: 48px;
+  padding: 40px;
+  background: url(../img/common/sp/cta-sp.png)
+    no-repeat center center / cover;
+
+  @include mq {
+    padding: 74px 0px;
+    margin-block-start: 64px;
+    background: url(../img/common/cta.png)
+      no-repeat center center / cover;
+  }
+}
+
+.p-cta__inner {
+  @include mq {
+    width: 100%;
+    max-width: calc(840px + 80px);
+    padding-inline: 40px;
+  }
+}
+
+.p-cta__btnWrap {
+  display: flex;
+  flex-direction: column;
+  gap: myClamp(22, 130);
+  align-items: start;
+  margin-inline-end: 28px;
+
+  @include mq {
+    flex-direction: row;
+    margin-inline-end: 0;
+  }
+}
+
+.p-cta__btn {
+  width: myClamp(282, 392);
+  aspect-ratio: 282 / 65;
+  transition-duration: $hover-transition;
+  transition-property: opacity, transform;
+
+  &:focus-visible {
+    opacity: $opacity-08;
+    transform: translateY(8px);
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      opacity: $opacity-08;
+      transform: translateY(8px);
+    }
+  }
+
+  @include mq {
+    width: 392px;
+    aspect-ratio: 392 / 92;
+  }
+
+  &.is-introduction {
+    width: myClamp(237, 319);
+    aspect-ratio: 237 / 65;
+
+    @include mq {
+      aspect-ratio: 318 / 92;
+    }
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}

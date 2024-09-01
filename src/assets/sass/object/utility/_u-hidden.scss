@@ -1,0 +1,28 @@
+@use "../../global/mixin" as *;
+
+.u-hidden-pc {
+  @include mq {
+    display: none;
+  }
+}
+
+.u-hidden-sp {
+  @include mq(md, max) {
+    display: none;
+  }
+}
+
+.u-visually-hidden {
+  position: fixed !important;
+  inset: 0 !important;
+  display: block !important;
+  inline-size: 4px !important;
+  block-size: 4px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  contain: strict !important;
+  pointer-events: none !important;
+  visibility: visible !important;
+  border: none !important;
+  opacity: 0 !important;
+}

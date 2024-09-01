@@ -1,0 +1,43 @@
+@use "../../global/mixin" as *;
+@use "../../global/color" as *;
+@use "../../global/font" as *;
+@use "../../global/variables" as *;
+@use "../../global/function" as *;
+
+.p-index-new {
+  margin-block-start: 25px;
+  display: grid;
+  place-items: center;
+
+  @include mq {
+    margin-block-start: 76px;
+
+  }
+}
+
+.p-index-new__inner {
+  padding-inline: 44px;
+}
+
+.p-index-new__cards,
+.p-index-new__footer {
+  margin-block-start: 32px;
+
+  @include mq {
+    margin-block-start: 48px;
+  }
+}
+
+.p-index-new__cards {
+  display: block grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(302px, 100%), 1fr));
+  gap: myClamp(20, 64);
+}
+
+.p-index-new__footer {
+  text-align: right;
+
+  @include mq {
+    text-align: center;
+  }
+}

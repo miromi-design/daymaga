@@ -1,0 +1,50 @@
+@use "../../global/mixin" as *;
+@use "../../global/color" as *;
+@use "../../global/font" as *;
+@use "../../global/variables" as *;
+@use "../../global/function" as *;
+
+.c-pagination {
+  margin-block-start: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+
+  @include mq {
+    margin-block-start: 57px;
+  }
+}
+
+.c-pagination__list {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.c-pagination__item {
+  font-size: 2rem;
+  line-height: $line-height-1dot4;
+  letter-spacing: 3px;
+  padding: 3px 8px;
+  color: $text-gray-color;
+  height: 36px;
+
+  &.is-current {
+    color: $white;
+    border-radius: 4px;
+    background: $accent-color-lightBlue;
+  }
+}
+
+.c-pagination__nav {
+  width: 36px;
+  aspect-ratio: 1;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}

@@ -1,0 +1,180 @@
+@use "../global/mixin" as *;
+@use "../global/color" as *;
+@use "../global/font" as *;
+@use "../global/variables" as *;
+@use "../global/function" as *;
+@use "sass:math";
+
+.l-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: $sp-header-height;
+  padding: 0 2rem;
+  z-index: map-get($layer, "header");
+  transition: background-color $hover-transition, padding $hover-transition;
+
+  @media screen and (min-width: 1124px) {
+    padding: 0 myHeader(40, 64) 0 myHeader(24, 48);
+    height: $pc-header-height;
+  }
+
+  //スクロール後の設定
+  &.is-scrolled {
+    height: myClamp(61, 98);
+
+    //スクロール前のロゴ
+    .l-header__logo--svg {
+      display: none;
+      pointer-events: none;
+    }
+    //スクロールすると切り替わるロゴ
+    .l-header__logo--scrolled {
+      display: block;
+      &:focus-visible {
+        opacity: $opacity-08;
+      }
+
+      @media (any-hover: hover) {
+        &:hover {
+          opacity: $opacity-08;
+        }
+      }
+    }
+  }
+}
+
+.l-header__logo {
+  position: fixed;
+  width: 260px;
+  height: 76px;
+  left: 20px;
+  margin-block-start: 32px;
+
+  @include mq {
+    left: 48px;
+  }
+}
+
+//スクロール前のロゴ
+.l-header__logo--svg {
+  display: block;
+  transition: opacity $hover-transition ease;
+
+  &:focus-visible {
+    opacity: $opacity-08;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      opacity: $opacity-08;
+    }
+  }
+}
+
+//スクロールすると切り替わるロゴ
+.l-header__logo--scrolled {
+  position: fixed;
+  top: 11px;
+  left: 22px;
+  width: myClamp(165, 218);
+  aspect-ratio: 160 / 32;
+  transition: opacity $hover-transition ease;
+  display: none;
+
+  @media screen and (min-width: 1124px) {
+    top: 27px;
+    left: 42px;
+  }
+}
+
+.l-header__wrap {
+  display: none;
+
+  @media screen and (min-width: 1124px) {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: myHeader(24, 44);
+    background: $accent-color;
+    height: $pc-header-height;
+    padding-inline: myHeader(32, 64);
+    border-radius: 0px 0px 0px 32px;
+  }
+}
+
+.l-header__nav {
+}
+
+.l-header__menu {
+  display: flex;
+  align-items: center;
+  column-gap: myHeader(24, 50);
+  color: $white;
+  white-space: nowrap;
+
+  a {
+    line-height: $pc-header-height;
+    transition: opacity $hover-transition ease;
+
+    &:focus-visible {
+      opacity: $opacity-08;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        opacity: $opacity-08;
+      }
+    }
+  }
+}
+
+.l-header__btnWrap {
+  display: flex;
+  gap: 2.7rem;
+}
+
+.l-header__btn {
+  width: 152px;
+  height: 51px;
+  transition-duration: $hover-transition;
+  transition-property: opacity, transform;
+
+  &:focus-visible {
+    opacity: $opacity-08;
+    transform: translateY(4px);
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      opacity: $opacity-08;
+      transform: translateY(4px);
+    }
+  }
+}
+
+.l-header__keyword {
+  width: 28px;
+  aspect-ratio: 1;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  transition: opacity $hover-transition ease;
+
+  &:focus-visible {
+    opacity: $opacity-08;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      opacity: $opacity-08;
+    }
+  }
+}

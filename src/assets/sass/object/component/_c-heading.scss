@@ -1,0 +1,53 @@
+@use "../../global/mixin" as *;
+@use "../../global/color" as *;
+@use "../../global/font" as *;
+@use "../../global/variables" as *;
+@use "../../global/function" as *;
+
+.c-section-title {
+  color: $accent-color;
+  text-shadow: 0px 2px 24px rgba(0, 0, 0, 0.05);
+  font-family: $font-ja-zen;
+  font-size: myClamp(24, 32);
+  font-weight: 700;
+  line-height: $line-height-1dot2;
+  letter-spacing: 4.8px;
+  position: relative;
+  padding-left: myClamp(54, 84);
+  text-align: left;
+  width: fit-content;
+
+  @include mq {
+    letter-spacing: 6.4px;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    background: url(../img/common/logo-mark_color.png)
+      no-repeat center center / contain;
+    top: 7px;
+    left: 0;
+    width: myClamp(42, 72);
+    aspect-ratio: 42 / 22;
+
+    @include mq {
+      top: 0;
+    }
+  }
+
+  &.is-new {
+    @include mq {
+      margin-inline: auto;
+    }
+  }
+
+  &.is-white {
+    color: $white;
+
+    &::after {
+      background: url(../img/common/logo-mark_white.png)
+        no-repeat center center / contain;
+    }
+  }
+}

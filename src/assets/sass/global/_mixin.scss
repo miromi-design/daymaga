@@ -1,0 +1,52 @@
+//マップ型変数breakpointsを定義
+$breakpoints: (
+  sp: "screen and (max-width: 749px)",
+  pc: "screen and (min-width: 750px)",
+);
+
+@mixin mq($breakpoint: pc) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+// _mixin.scss
+$mq-breakpoints: (
+  'xs': 321px,//極狭sp用
+  'sm': 576px,//sp用
+  'md': 750px,//sp用
+  'lg': 950px,//pcタブレット用
+  'xl': 1280px,//pc用
+  'xxl': 1920px,
+) !default;
+@mixin mq($breakpoint: md, $rule: min) {
+  $breakpoint: map-get($mq-breakpoints, $breakpoint);
+  @if $rule == max {
+    $breakpoint: $breakpoint - 1px;
+  }
+  @media screen and (#{$rule}-width: $breakpoint) {
+    @content;
+  }
+}
+
+// // 使う時（min-width）
+// .element01 {
+//   // ここにsp用スタイル
+//   @include mq {
+//     // @media screen and (min-width: 768px)と同じ
+//   }
+//   @include mq(lg) {
+//     // @media screen and (min-width: 1024px)と同じ
+//   }
+// }
+
+// // 使う時（max-width）
+// .element02 {
+//   // ここにpc用スタイル
+//   @include mq(lg, max) {
+//     // @media screen and (max-width: 1023px)と同じ
+//   }
+//   @include mq(md, max) {
+//     // @media screen and (max-width: 767px)と同じ
+//   }
+// }

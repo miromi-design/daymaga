@@ -1,0 +1,45 @@
+@use "../../global/mixin" as *;
+@use "../../global/color" as *;
+@use "../../global/font" as *;
+@use "../../global/variables" as *;
+@use "../../global/function" as *;
+
+.p-recommend__splide {
+  margin-block-start: 24px;
+}
+
+.p-recommend__slideWrap {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding-left: calc(50vw - 50%);
+  overflow: hidden;
+}
+
+.p-recommend__link {
+  transition: opacity $hover-transition ease;
+  padding: 16px;
+  background-color: $white;
+  border-radius: 12px;
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.03),
+    0px 5px 30px 0px rgba(20, 43, 78, 0.2);
+  display: block;
+  height: 100%;
+
+  &:focus-visible {
+    opacity: $opacity-08;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      opacity: $opacity-08;
+    }
+  }
+}
+
+.p-recommend__wrapper {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
