@@ -1,4 +1,4 @@
-<article class="c-card" aria-labelledby="<?php the_title(); ?>">
+<article class="c-card" role="article" aria-labelledby="<?php the_title(); ?>">
   <a class="c-card__link" href="<?php the_permalink(); ?>">
     <h3 class="c-card__title">
       <?php the_title(); ?>
