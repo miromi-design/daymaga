@@ -12,10 +12,10 @@ function my_script_init()
 	wp_enqueue_style("my-css", get_template_directory_uri() . "/assets/css/style.min.css", array(), filemtime(get_theme_file_path('assets/css/style.min.css')), "all");
 
 	// jQueryの読み込み・true → </body>の前に書かれる
-	wp_enqueue_script('jquery', "https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js", "", "1.0.1", true);
+	// wp_enqueue_script('jquery', "https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js", "", "1.0.1", true);
 
-	// テーマのJavaScriptファイルの読み込み
-	wp_enqueue_script("my-js", get_template_directory_uri() . "/assets/js/main.min.js", array("jquery"), filemtime(get_theme_file_path('assets/js/main.min.js')), true);
+	// テーマのJavaScriptファイルの読み込み(jqueryなし)
+	wp_enqueue_script("my-js", get_template_directory_uri() . "/assets/js/main.min.js", array(), filemtime(get_theme_file_path('assets/js/main.min.js')), true);
 
 	// テーマのスタイルシートの読み込み
 	wp_enqueue_style('my-theme-style', get_stylesheet_uri());

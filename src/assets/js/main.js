@@ -142,13 +142,16 @@ const hamburger = document.getElementById("js-drawer-icon");
 const focusTrap = document.getElementById("js-focus-trap");
 const menu = document.querySelector("#js-drawer-content");
 const drawerBackground = document.getElementById("js-drawer-background");
-const iconWrap = document.querySelector(".l-drawer__iconWrap");//ドロワーラップにもactive付与する
+const iconWrap = document.querySelector(".l-drawer__iconWrap"); // ドロワーラップにもactive付与する
 
 if (hamburger) {
+  // aria-haspopup の設定
+  hamburger.setAttribute("aria-haspopup", "true");
+
   hamburger.addEventListener("click", () => {
     hamburger.classList.toggle(CLASS);
     menu.classList.toggle(CLASS);
-    iconWrap.classList.toggle(CLASS);//ドロワーラップ
+    iconWrap.classList.toggle(CLASS); // ドロワーラップ
     backgroundFix(!flg);
     hamburger.setAttribute("aria-expanded", flg ? "false" : "true");
     flg = !flg;
@@ -190,6 +193,7 @@ menuLinks.forEach(link => {
     }
   });
 });
+
 
 //=====================================
 //    splide

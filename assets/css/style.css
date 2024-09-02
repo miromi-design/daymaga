@@ -1202,7 +1202,7 @@ img {
 .p-index-new__cards {
 	display: block grid;
 	gap: clamp(2rem, 0.366rem + 4.19vw, 6.4rem);
-	grid-template-columns: repeat(auto-fill, minmax(min(302px, 100%), 1fr));
+	grid-template-columns: repeat(1, 1fr);
 }
 
 .p-index-new__footer {
@@ -2415,6 +2415,10 @@ a:hover {
 .p-index-new__cards,
 .p-index-new__footer {
 	margin-block-start: 48px;
+}
+
+.p-index-new__cards {
+	grid-template-columns: repeat(3, 1fr);
 }
 
 .p-index-new__footer {
